@@ -29,15 +29,19 @@ public class EditorFrame {
         JMenuItem newTab = new JMenuItem("New");
         JMenuItem open = new JMenuItem("Open");
         JMenuItem save = new JMenuItem("Save");
+        JMenuItem saveAs = new JMenuItem("Save As");
         JMenuItem exit = new JMenuItem("Exit");
 
         newTab.addActionListener(e -> tabManager.addTab());
         open.addActionListener(e -> tabManager.openFile());
+        saveAs.addActionListener(e -> tabManager.saveAsFile());
         exit.addActionListener(e -> System.exit(0));
 
         fileMenu.add(newTab);
         fileMenu.add(open);
+        fileMenu.addSeparator();
         fileMenu.add(save);
+        fileMenu.add(saveAs);
         fileMenu.addSeparator();
         fileMenu.add(exit);
 

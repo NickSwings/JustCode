@@ -11,6 +11,28 @@ public class TabManager {
         tabbedPane = new JTabbedPane();
     }
 
+    public void saveAsFile() {
+        int index=tabbedPane.getSelectedIndex();
+        if(index<0)
+            return;
+
+        JFileChooser chooser = new JFileChooser();
+        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        int result=chooser.showSaveDialog(null);
+        if(result!=JFileChooser.APPROVE_OPTION)
+            return;
+        File file=chooser.getSelectedFile();
+
+        JPanel panel = (JPanel) tabbedPane.getComponentAt(index);
+        JScrollPane scroll = (JScrollPane) panel.getComponent(0);
+        JTextPane textPane = (JTextPane) scroll.getViewport().getView();
+        String content = textPane.getText();
+
+        try{
+            Files.write(file.toPath(),content.getBytes());
+        }catch(IOException e){e.printStackTrace();}
+    }
+
     public void openFile(){
         JFileChooser chooser = new JFileChooser();
         chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
