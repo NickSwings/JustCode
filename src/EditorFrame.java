@@ -6,7 +6,7 @@ public class EditorFrame {
     private TabManager tabManager;
 
     public EditorFrame(){
-        frame = new JFrame("Lite Code");
+        frame = new JFrame("Just Code");
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1000,700);
