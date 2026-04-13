@@ -32,6 +32,7 @@ public class EditorFrame {
         JMenuItem exit = new JMenuItem("Exit");
 
         newTab.addActionListener(e -> tabManager.addTab());
+        open.addActionListener(e -> tabManager.openFile());
         exit.addActionListener(e -> System.exit(0));
 
         fileMenu.add(newTab);

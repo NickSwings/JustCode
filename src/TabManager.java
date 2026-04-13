@@ -1,5 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 
 public class TabManager {
     private JTabbedPane tabbedPane;
@@ -8,18 +11,36 @@ public class TabManager {
         tabbedPane = new JTabbedPane();
     }
 
-    public void addTab(){
+    public void openFile(){
+        JFileChooser chooser = new JFileChooser();
+        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        int result=chooser.showOpenDialog(null);
+        if(result==JFileChooser.APPROVE_OPTION){
+            File file=chooser.getSelectedFile();
+            try {
+                String content = new String(Files.readAllBytes(file.toPath()));
+                addTab(file.getName(),content);
+            }catch (IOException e){e.printStackTrace();}
+        }
+    }
+
+    public void addTab(String title, String content){
         JPanel panel = new JPanel(new BorderLayout());
         JTextPane textPane = new JTextPane();
+        textPane.setText(content);
         JScrollPane scrollPane = new JScrollPane(textPane);
 
         panel.add(scrollPane,BorderLayout.CENTER);
-        tabbedPane.addTab("Untitled", panel);
+        tabbedPane.addTab(title, panel);
         tabbedPane.setSelectedIndex(tabbedPane.getTabCount()-1);
         tabbedPane.setTabComponentAt(
                 tabbedPane.getTabCount()-1,
-                createTabHeader("Untitled")
+                createTabHeader(title)
         );
+    }
+
+    public void addTab(){
+        addTab("Untitled","");
     }
 
     private JPanel createTabHeader(String title){
