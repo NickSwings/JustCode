@@ -34,6 +34,7 @@ public class EditorFrame {
 
         newTab.addActionListener(e -> tabManager.addTab());
         open.addActionListener(e -> tabManager.openFile());
+        save.addActionListener(e -> tabManager.saveFile());
         saveAs.addActionListener(e -> tabManager.saveAsFile());
         exit.addActionListener(e -> System.exit(0));
 

@@ -11,25 +11,42 @@ public class TabManager {
         tabbedPane = new JTabbedPane();
     }
 
-    public void saveAsFile() {
+    public void saveAsFile(){
         int index=tabbedPane.getSelectedIndex();
         if(index<0)
             return;
-
         JFileChooser chooser = new JFileChooser();
         chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         int result=chooser.showSaveDialog(null);
         if(result!=JFileChooser.APPROVE_OPTION)
             return;
         File file=chooser.getSelectedFile();
+        EditorPanel editorPanel = (EditorPanel) tabbedPane.getComponentAt(index);
+        String content = editorPanel.getContent();
+        try{
+            Files.write(file.toPath(),content.getBytes());
+            editorPanel.setFile(file);
+            tabbedPane.setTabComponentAt(index,createTabHeader(file.getName()));
+        }catch(IOException e){e.printStackTrace();}
+    }
 
-        JPanel panel = (JPanel) tabbedPane.getComponentAt(index);
-        JScrollPane scroll = (JScrollPane) panel.getComponent(0);
-        JTextPane textPane = (JTextPane) scroll.getViewport().getView();
-        String content = textPane.getText();
+    public void saveFile() {
+        int index=tabbedPane.getSelectedIndex();
+        if(index<0)
+            return;
+
+        EditorPanel editorPanel = (EditorPanel) tabbedPane.getComponentAt(index);
+        String content = editorPanel.getContent();
+        File file=editorPanel.getFile();
+        if(file==null){
+            saveAsFile();
+            return;
+        }
 
         try{
             Files.write(file.toPath(),content.getBytes());
+            editorPanel.setFile(file);
+            tabbedPane.setTabComponentAt(index,createTabHeader(file.getName()));
         }catch(IOException e){e.printStackTrace();}
     }
 
@@ -37,28 +54,26 @@ public class TabManager {
         JFileChooser chooser = new JFileChooser();
         chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         int result=chooser.showOpenDialog(null);
-        if(result==JFileChooser.APPROVE_OPTION){
-            File file=chooser.getSelectedFile();
-            try {
-                String content = new String(Files.readAllBytes(file.toPath()));
-                addTab(file.getName(),content);
-            }catch (IOException e){e.printStackTrace();}
-        }
+        if(result!=JFileChooser.APPROVE_OPTION)
+            return;
+
+        File file=chooser.getSelectedFile();
+        try {
+            String content = new String(Files.readAllBytes(file.toPath()));
+            EditorPanel editorPanel=addTab(file.getName(),content);
+            editorPanel.setFile(file);
+        }catch (IOException e){e.printStackTrace();}
     }
 
-    public void addTab(String title, String content){
-        JPanel panel = new JPanel(new BorderLayout());
-        JTextPane textPane = new JTextPane();
-        textPane.setText(content);
-        JScrollPane scrollPane = new JScrollPane(textPane);
-
-        panel.add(scrollPane,BorderLayout.CENTER);
-        tabbedPane.addTab(title, panel);
+    public EditorPanel addTab(String title, String content){
+        EditorPanel editorPanel=new EditorPanel(content);
+        tabbedPane.addTab(title, editorPanel);
         tabbedPane.setSelectedIndex(tabbedPane.getTabCount()-1);
         tabbedPane.setTabComponentAt(
                 tabbedPane.getTabCount()-1,
                 createTabHeader(title)
         );
+        return editorPanel;
     }
 
     public void addTab(){
@@ -71,11 +86,7 @@ public class TabManager {
         JButton closeBtn = new JButton("x");
         closeBtn.setMargin(new Insets(0,4,0,4));
 
-        closeBtn.addActionListener(e -> {
-            int index = tabbedPane.indexOfTabComponent(header);
-            //if(tabbedPane.getTabCount()>1)
-                tabbedPane.remove(index);
-        });
+        closeBtn.addActionListener(e -> tabbedPane.remove(tabbedPane.indexOfTabComponent(header)));
 
         header.add(titleLabel);
         header.add(closeBtn);
