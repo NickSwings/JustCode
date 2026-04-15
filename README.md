@@ -19,8 +19,8 @@ Requirements: JDK 25
 
 Clone the repo and run:
 
-bash run.sh  # Linux/Ubuntu
-run.bat      # Windows
+- bash run.sh  # Linux/Ubuntu
+- run.bat      # Windows
 
 ## Roadmap
 - [ ] Line Numbers
@@ -28,6 +28,6 @@ run.bat      # Windows
 - [ ] Find & Replace
 
 ## License
-Copyright © 2026 Raunak. All Rights Reserved.
+Copyright © 2026 Raunak Dey. All Rights Reserved.
 No part of this project may be used, copied, or modified
 without explicit permission from the author.
