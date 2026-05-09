@@ -22,11 +22,12 @@ Clone the repo and run the main class:
 `src/editor/Main.java`
 
 ## Roadmap
-- [x] Line Numbers
-- [x] Syntax Highlighting (C)
-- [ ] Keyboard Shortcuts (Ctrl+N, Ctrl+S, Ctrl+W, etc.)
-- [ ] In-Editor Code Execution (Compile and Run directly from the UI)
-- [ ] Find & Replace
+## Roadmap
+✅ Line Numbers<br>
+✅ Syntax Highlighting (C)<br>
+⬜ Keyboard Shortcuts (Ctrl+N, Ctrl+S, Ctrl+W, etc.)<br>
+⬜ In-Editor Code Execution (Compile and Run directly from the UI)<br>
+⬜ Find & Replace
 
 ## License
 Copyright © 2026 Raunak Dey. All Rights Reserved.
