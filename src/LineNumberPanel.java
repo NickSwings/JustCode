@@ -1,6 +1,5 @@
-import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
+import javax.swing.JComponent;
+import javax.swing.JTextPane;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Element;
 import java.awt.*;
