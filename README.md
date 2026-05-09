@@ -3,31 +3,36 @@
 A super simple lightweight code editor built with Java Swing.
 
 ## Features
-- Multiple tabs with close button
-- Open file
-- Save / Save As
+- Multiple tabs with dynamic close buttons
+- Open, Save, and Save As functionality
+- **Dynamic Line Numbers** that sync with document changes
+- **Syntax Highlighting** (Currently supports C/C++ keywords, strings, comments, and directives via a scalable Factory architecture)
 
 ## Installation
-1. Download `JustCode-0.1.exe` from Releases
+1. Download `JustCode-0.2.0.exe` from the GitHub Releases page
 2. Run the installer
-3. Launch JustCode from Start Menu or Desktop
+3. Launch JustCode from the Start Menu or Desktop shortcut
 
-No additional requirements — the installer bundles everything!
+No additional requirements — the installer bundles the Java Runtime!
 
 ## Building from Source
 Requirements: JDK 25
 
-Clone the repo and run:
-
-- bash run.sh  # Linux/Ubuntu
-- run.bat      # Windows
+Clone the repo and run the main class:
+`src/editor/Main.java`
 
 ## Roadmap
-- [ ] Line Numbers
-- [ ] Syntax Highlighting
+- [x] Line Numbers
+- [x] Syntax Highlighting (C)
+- [ ] Keyboard Shortcuts (Ctrl+N, Ctrl+S, Ctrl+W, etc.)
+- [ ] In-Editor Code Execution (Compile and Run directly from the UI)
 - [ ] Find & Replace
 
 ## License
 Copyright © 2026 Raunak Dey. All Rights Reserved.
-No part of this project may be used, copied, or modified
-without explicit permission from the author.
+
+**Proprietary / Source-Available License**
+* You are free to download, install, and use the JustCode application for personal, non-commercial purposes.
+* You may download and study the source code for personal educational purposes.
+* You may **NOT** redistribute the compiled application.
+* You may **NOT** use, copy, modify, or publish this source code (in whole or in part) in any public or commercial project without explicit written permission from the author.
