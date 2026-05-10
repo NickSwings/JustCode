@@ -36,4 +36,4 @@ bin/
 src/META-INF/
 JustCode-*.exe
 
-build_installer.bat
+Build Installer.bat
