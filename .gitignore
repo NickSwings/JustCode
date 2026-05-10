@@ -35,3 +35,5 @@ bin/
 *.class
 src/META-INF/
 JustCode-*.exe
+
+build_installer.bat
