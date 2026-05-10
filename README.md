@@ -24,8 +24,8 @@ Clone the repo and run the main class:
 ## Roadmap
 ## Roadmap
 ✅ Line Numbers<br>
-✅ Syntax Highlighting (C)<br>
-⬜ Keyboard Shortcuts (Ctrl+N, Ctrl+S, Ctrl+W, etc.)<br>
+✅ Syntax Highlighting (currently only supports C, support for more languages coming soon)<br>
+⬜ Keyboard Shortcuts<br>
 ⬜ In-Editor Code Execution (Compile and Run directly from the UI)<br>
 ⬜ Find & Replace
 
