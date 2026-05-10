@@ -22,7 +22,6 @@ Clone the repo and run the main class:
 `src/editor/Main.java`
 
 ## Roadmap
-## Roadmap
 ✅ Line Numbers<br>
 ✅ Syntax Highlighting (currently only supports C, support for more languages coming soon)<br>
 ⬜ Keyboard Shortcuts<br>
