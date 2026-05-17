@@ -1,4 +1,3 @@
-import javax.swing.JTextPane;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
@@ -7,16 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CSyntax implements LanguageSyntax {
-//    private static final String[] KEYWORDS = {
-//            "auto", "break", "case", "char", "const", "continue", "default", "do",
-//            "double", "else", "enum", "extern", "float", "for", "goto", "if",
-//            "int", "long", "register", "return", "short", "signed", "sizeof", "static",
-//            "struct", "switch", "typedef", "union", "unsigned", "void", "volatile", "while"
-//    };
-//
-//    private static final String KEYWORD_PATTERN = "\\b("+String.join("|", KEYWORDS)+")\\b";
-//    private static final Pattern PATTERN = Pattern.compile("\"[^\"]*\"" + "|" + "//.*" + "|" +  KEYWORD_PATTERN + "|" + "#[a-zA-Z]+");
-//    private static final Pattern PATTERN = Pattern.compile("\"[^\"]*\"|//.*|auto|break|case|char|const|continue|default|do|double|else|enum|extern|float|for|goto|if|int|long|register|return|short|signed|sizeof|static|struct|switch|typedef|union|unsigned|void|volatile|while|#[a-zA-Z]+");
+
     private static final Pattern PATTERN = getPattern();
     private static final SimpleAttributeSet
             DEFAULT_ATTR = new SimpleAttributeSet(),
@@ -37,7 +27,6 @@ public class CSyntax implements LanguageSyntax {
 
     @Override
     public void applyHighlighting(StyledDocument doc, String text) {
-        //System.out.println(KEYWORD_PATTERN);
         Matcher matcher = PATTERN.matcher(text);
         while (matcher.find()) {
             int start = matcher.start();
@@ -56,13 +45,21 @@ public class CSyntax implements LanguageSyntax {
     }
     private static Pattern getPattern(){
         String[] KEYWORDS = {
-            "auto", "break", "case", "char", "const", "continue", "default", "do",
-            "double", "else", "enum", "extern", "float", "for", "goto", "if",
-            "int", "long", "register", "return", "short", "signed", "sizeof", "static",
-            "struct", "switch", "typedef", "union", "unsigned", "void", "volatile", "while"
-    };
+            "auto", "break", "case", "char", "const", "continue", "default", "do", "double",
+            "else", "enum", "extern", "float", "for", "goto", "if", "int", "long", "register",
+            "return", "short", "signed", "sizeof", "static", "struct", "switch", "typedef",
+            "union", "unsigned", "void", "volatile", "while"
+        };
 
-    String KEYWORD_PATTERN = "\\b("+String.join("|", KEYWORDS)+")\\b";
-    return Pattern.compile("\"[^\"]*\"" + "|" + "//.*" + "|" +  KEYWORD_PATTERN + "|" + "#[a-zA-Z]+");
+        String
+            KEYWORD_PATTERN = "\\b("+String.join("|", KEYWORDS)+")\\b",
+            STRING_PATTERN = "\"[^\"]*\"",
+            COMMENT_PATTERN = "//.*",
+            PREPROC_PATTERN = "#[a-zA-Z]+";
+
+        return Pattern.compile(STRING_PATTERN  + "|"
+                                   + COMMENT_PATTERN + "|"
+                                   + KEYWORD_PATTERN + "|"
+                                   + PREPROC_PATTERN);
     }
 }

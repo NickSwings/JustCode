@@ -14,13 +14,14 @@ public class SyntaxHighlighter {
         StyleConstants.setBold(DEFAULT_ATTR, false);
     }
 
-    // Notice we now pass the LanguageSyntax interface as a parameter!
     public static void highlight(JTextPane textPane, LanguageSyntax syntax) {
         StyledDocument doc = textPane.getStyledDocument();
         String text;
+
         try {
             text = doc.getText(0, doc.getLength());
-        } catch (BadLocationException e) {
+        }
+        catch (BadLocationException e) {
             e.printStackTrace();
             return;
         }

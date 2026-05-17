@@ -30,7 +30,7 @@ public class LineNumberPanel extends JComponent {
         Element root = pane.getDocument().getDefaultRootElement();
         int lineCount = root.getElementCount();
 
-        for (int i = 0; i < lineCount; ) {
+        for (int i = 0; i < lineCount;){
             try {
                 int offset = root.getElement(i++).getStartOffset();
                 Rectangle rect = pane.modelToView(offset);
@@ -39,7 +39,7 @@ public class LineNumberPanel extends JComponent {
                     String lineNum = String.valueOf(i);
                     g.drawString(lineNum, 5, rect.y + fontAscent);
                 }
-            } catch (BadLocationException e) {
+            }catch(BadLocationException e){
                 e.printStackTrace();
             }
         }
@@ -47,7 +47,6 @@ public class LineNumberPanel extends JComponent {
 
     @Override
     public Dimension getPreferredSize() {
-        // Dynamically adjust width based on total lines
         int lineCount = pane.getDocument().getDefaultRootElement().getElementCount();
         int width = pane.getFontMetrics(pane.getFont()).stringWidth(lineCount + " ") + 10;
         return new Dimension(Math.max(width, 30), pane.getHeight());
